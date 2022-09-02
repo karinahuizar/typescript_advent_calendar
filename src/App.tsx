@@ -5,7 +5,14 @@ import { HatchType, createCalendar } from './helpers';
 import { GlobalStyle, StyledApp } from './App.styles';
 
 const App: React.FC = () => {
-  const [hatches, setHatches] = React.useState<HatchType[]>(createCalendar());
+  const [hatches, setHatches] = React.useState<HatchType[]>(
+    localStorage.calendar ? JSON.parse(localStorage.calendar) : createCalendar()
+  );
+
+  // Store calendar in localStorage
+  React.useEffect(() => {
+    localStorage.setItem('calendar', JSON.stringify(hatches));
+  }, [hatches]);
 
   const handleClickHatch = (nr: number) => {
     setHatches(prev => prev.map(hatch => (hatch.nr === nr ? { ...hatch, open: !hatch.open } : hatch)));
