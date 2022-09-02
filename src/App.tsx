@@ -7,7 +7,9 @@ import { GlobalStyle, StyledApp } from './App.styles';
 const App: React.FC = () => {
   const [hatches, setHatches] = React.useState<HatchType[]>(createCalendar());
 
-  const handleClickHatch = () => console.log('click!');
+  const handleClickHatch = (nr: number) => {
+    setHatches(prev => prev.map(hatch => (hatch.nr === nr ? { ...hatch, open: !hatch.open } : hatch)));
+  };
 
   return (
     <StyledApp>
