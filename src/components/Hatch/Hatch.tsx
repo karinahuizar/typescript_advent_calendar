@@ -10,9 +10,8 @@ type Props = {
   enabledCallback: (nr: number) => boolean;
 };
 
-
-const Hatch: React.FC = ({ hatch: { nr, text, img, open }, handleClick, enabledCallback }) => (
-  <Wrapper open={open} background={img} enabled={true} onClick={() => handleClick(nr)}>
+const Hatch: React.FC<Props> = ({ hatch: { nr, text, img, open }, handleClick, enabledCallback }) => (
+  <Wrapper open={open} background={img} enabled={enabledCallback(nr)} onClick={() => handleClick(nr)}>
     <div className='front'>
       <p>{nr}</p>
     </div>

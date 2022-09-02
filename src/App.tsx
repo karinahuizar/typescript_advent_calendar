@@ -18,11 +18,24 @@ const App: React.FC = () => {
     setHatches(prev => prev.map(hatch => (hatch.nr === nr ? { ...hatch, open: !hatch.open } : hatch)));
   };
 
+  const isHatchEnabled = React.useCallback((nr: number): boolean => {
+    const date = new Date();
+
+    const day = date.getUTCDate();
+    const month = date.getMonth(); // starts with 0, meaning that 11 = dec
+    const year = date.getFullYear();
+
+    if (year > 2021) return true;
+    if (month === 11 && nr <= day) return true;
+
+    return false;
+  }, []);
+
   return (
     <StyledApp>
       <GlobalStyle />
       {hatches.map(hatch => (
-        <Hatch key={hatch.nr} hatch={hatch} handleClick={handleClickHatch} onClick={() => handleClick(nr)} />
+        <Hatch key={hatch.nr} hatch={hatch} handleClick={handleClickHatch} enabledCallback={isHatchEnabled} />
       ))}
     </StyledApp>
   );
