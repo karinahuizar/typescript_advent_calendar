@@ -18,7 +18,7 @@ const App: React.FC = () => {
     setHatches(prev => prev.map(hatch => (hatch.nr === nr ? { ...hatch, open: !hatch.open } : hatch)));
   }, []);
 
-  const isHatchEnabled = (nr: number): boolean => {
+  const isHatchEnabled = React.useCallback((nr: number): boolean => {
     const date = new Date();
 
     const day = date.getUTCDate();
@@ -29,7 +29,7 @@ const App: React.FC = () => {
     if (month === 8 && nr <= day) return true;
 
     return false;
-  };
+  }, []);
 
   return (
     <StyledApp>
