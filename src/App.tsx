@@ -13,7 +13,7 @@ const App: React.FC = () => {
     <StyledApp>
       <GlobalStyle />
       {hatches.map(hatch => (
-        <Hatch key={hatch.nr} hatch={hatch} handleClick={handleClickHatch} />
+        <Hatch key={hatch.nr} hatch={hatch} handleClick={handleClickHatch} onClick={() => handleClick(nr)} />
       ))}
     </StyledApp>
   );
