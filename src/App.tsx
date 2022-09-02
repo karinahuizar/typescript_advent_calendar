@@ -14,22 +14,22 @@ const App: React.FC = () => {
     localStorage.setItem('calendar', JSON.stringify(hatches));
   }, [hatches]);
 
-  const handleClickHatch = (nr: number) => {
+  const handleClickHatch = React.useCallback((nr: number): void => {
     setHatches(prev => prev.map(hatch => (hatch.nr === nr ? { ...hatch, open: !hatch.open } : hatch)));
-  };
+  }, []);
 
-  const isHatchEnabled = React.useCallback((nr: number): boolean => {
+  const isHatchEnabled = (nr: number): boolean => {
     const date = new Date();
 
     const day = date.getUTCDate();
     const month = date.getMonth(); // starts with 0, meaning that 11 = dec
     const year = date.getFullYear();
 
-    if (year > 2021) return true;
-    if (month === 11 && nr <= day) return true;
+    if (year > 2022) return true;
+    if (month === 8 && nr <= day) return true;
 
     return false;
-  }, []);
+  };
 
   return (
     <StyledApp>
