@@ -5,17 +5,18 @@ import { HatchType, createCalendar } from './helpers';
 import { GlobalStyle, StyledApp } from './App.styles';
 
 const App: React.FC = () => {
-  const [hatches, setHatches] = React.useState<HatchType[]>(createCalendar()
-  );
+  const [hatches, setHatches] = React.useState<HatchType[]>(createCalendar());
+
+  const handleClickHatch = () => console.log('click!');
 
   return (
     <StyledApp>
       <GlobalStyle />
       {hatches.map(hatch => (
-        <Hatch key={hatch.nr} hatch={hatch} handleClick={handleClickHatch} enabledCallback={isHatchEnabled} />
+        <Hatch key={hatch.nr} hatch={hatch} handleClick={handleClickHatch} />
+      ))}
     </StyledApp>
-  ))
-}
+  );
 };
 
 export default App;
